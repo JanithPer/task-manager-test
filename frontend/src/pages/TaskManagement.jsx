@@ -34,6 +34,17 @@ export default function TaskManagement() {
     fetchTasks();
   }, [fetchTasks]);
 
+  useEffect(() => {
+    if (editingTask) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [editingTask]);
+
   const handleCreate = async (formData) => {
     try {
       const data = await createTask(formData, role);
@@ -89,7 +100,7 @@ export default function TaskManagement() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-200 sticky top-0 z-40">
+      <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-200 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
@@ -101,19 +112,6 @@ export default function TaskManagement() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <TaskForm onSubmit={handleCreate} isEditing={false} />
-
-        {editingTask && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-            <div className="w-full max-w-2xl animate-scale-in">
-              <TaskForm
-                onSubmit={handleUpdate}
-                initialData={editingTask}
-                onCancel={() => setEditingTask(null)}
-                isEditing
-              />
-            </div>
-          </div>
-        )}
 
         <div>
           <div className="flex items-center justify-between mb-4">
@@ -150,6 +148,19 @@ export default function TaskManagement() {
           )}
         </div>
       </main>
+
+      {editingTask && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fade-in">
+          <div className="w-full max-w-2xl animate-scale-in">
+            <TaskForm
+              onSubmit={handleUpdate}
+              initialData={editingTask}
+              onCancel={() => setEditingTask(null)}
+              isEditing
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
