@@ -13,7 +13,7 @@ const statusColors = {
 const priorityBorders = {
   LOW: 'border-l-green-600',
   MEDIUM: 'border-l-yellow-600',
-  HIGH: 'border-l-brand-red',
+  HIGH: 'border-l-red-600',
 };
 
 function getDueDateInfo(dueDate) {
