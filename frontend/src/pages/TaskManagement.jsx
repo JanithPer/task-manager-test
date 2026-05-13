@@ -167,7 +167,7 @@ export default function TaskManagement() {
       </main>
 
       {editingTask && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fade-in">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-start sm:items-center justify-center z-[60] p-4 overflow-y-auto animate-fade-in">
           <div className="w-full max-w-2xl animate-scale-in">
             <TaskForm
               onSubmit={handleUpdate}
