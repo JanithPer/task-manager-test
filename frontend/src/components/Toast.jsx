@@ -24,10 +24,10 @@ const icons = {
 };
 
 const styles = {
-  success: 'bg-emerald-50 border-emerald-200 ring-1 ring-emerald-200',
-  error: 'bg-red-50 border-red-200 ring-1 ring-red-200',
-  info: 'bg-blue-50 border-blue-200 ring-1 ring-blue-200',
-  warning: 'bg-amber-50 border-amber-200 ring-1 ring-amber-200',
+  success: 'bg-zinc-900 border-emerald-700 ring-1 ring-emerald-700/50',
+  error: 'bg-zinc-900 border-brand-red ring-1 ring-brand-red/50',
+  info: 'bg-zinc-900 border-blue-700 ring-1 ring-blue-700/50',
+  warning: 'bg-zinc-900 border-amber-700 ring-1 ring-amber-700/50',
 };
 
 export default function Toast({ toast, onRemove }) {
@@ -53,10 +53,10 @@ export default function Toast({ toast, onRemove }) {
       role="alert"
     >
       <span className="mt-0.5 flex-shrink-0">{icons[toast.type] || icons.info}</span>
-      <p className="text-sm font-medium text-gray-800 flex-1">{toast.message}</p>
+      <p className="text-sm font-medium text-gray-200 flex-1">{toast.message}</p>
       <button
         onClick={() => setIsExiting(true)}
-        className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
+        className="flex-shrink-0 text-gray-500 hover:text-gray-300 transition-colors"
         aria-label="Close"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

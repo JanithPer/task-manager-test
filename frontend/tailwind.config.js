@@ -6,11 +6,23 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        brand: {
+          red: '#B91B23',
+          dark: '#0C0C0C',
+          darker: '#080808',
+          gray: '#434343',
+        },
+      },
       animation: {
         'slide-in': 'slideIn 0.3s ease-out',
         'slide-out': 'slideOut 0.3s ease-in forwards',
         'fade-in': 'fadeIn 0.2s ease-out',
         'scale-in': 'scaleIn 0.2s ease-out',
+        'pulse-slow': 'pulse 3s ease-in-out infinite',
       },
       keyframes: {
         slideIn: {

@@ -113,13 +113,13 @@ export default function TaskManagement() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-200 sticky top-0 z-30">
+    <div className="min-h-screen bg-brand-dark">
+      <header className="bg-zinc-900/90 backdrop-blur-md shadow-lg shadow-black/20 border-b border-zinc-800 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-baseline gap-2 sm:gap-3 min-w-0">
-            <div className="size-2 bg-indigo-500 rounded-full animate-pulse shrink-0 self-center" />
-            <h1 className="text-base sm:text-xl font-bold text-gray-900 truncate">Task Manager</h1>
-            <span className="text-[10px] sm:text-[11px] font-medium px-1.5 sm:px-2.5 py-0.5 bg-gradient-to-r from-indigo-50 to-indigo-100 text-indigo-600 rounded-full border border-indigo-200/60 leading-none shrink-0 tracking-wide">
+            <div className="size-2 bg-brand-red rounded-full animate-pulse-slow shrink-0 self-center shadow-lg shadow-brand-red/40" />
+            <h1 className="text-base sm:text-xl font-bold text-white truncate">Task Manager</h1>
+            <span className="text-[10px] sm:text-[11px] font-medium px-1.5 sm:px-2.5 py-0.5 bg-brand-red/10 text-brand-red rounded-full border border-brand-red/30 leading-none shrink-0 tracking-wide">
               by Janith Perera
             </span>
           </div>
@@ -132,10 +132,10 @@ export default function TaskManagement() {
 
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-800">
+            <h2 className="text-lg font-semibold text-gray-200">
               Tasks
             </h2>
-            <span className="text-xs font-medium px-2.5 py-1 bg-indigo-100 text-indigo-700 rounded-full">
+            <span className="text-xs font-medium px-2.5 py-1 bg-brand-red/10 text-brand-red rounded-full border border-brand-red/20">
               {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
             </span>
           </div>
@@ -143,13 +143,13 @@ export default function TaskManagement() {
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[1, 2, 3].map((n) => (
-                <div key={n} className="bg-white rounded-xl border border-gray-200 p-5 animate-pulse">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-3" />
-                  <div className="h-3 bg-gray-200 rounded w-full mb-2" />
-                  <div className="h-3 bg-gray-200 rounded w-2/3 mb-4" />
+                <div key={n} className="bg-zinc-900/80 rounded-xl border border-zinc-800 p-5 animate-pulse">
+                  <div className="h-4 bg-zinc-700 rounded w-3/4 mb-3" />
+                  <div className="h-3 bg-zinc-700 rounded w-full mb-2" />
+                  <div className="h-3 bg-zinc-700 rounded w-2/3 mb-4" />
                   <div className="flex gap-2">
-                    <div className="h-3 bg-gray-200 rounded w-20" />
-                    <div className="h-3 bg-gray-200 rounded w-16" />
+                    <div className="h-3 bg-zinc-700 rounded w-20" />
+                    <div className="h-3 bg-zinc-700 rounded w-16" />
                   </div>
                 </div>
               ))}
@@ -167,7 +167,7 @@ export default function TaskManagement() {
       </main>
 
       {editingTask && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fade-in">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fade-in">
           <div className="w-full max-w-2xl animate-scale-in">
             <TaskForm
               onSubmit={handleUpdate}
