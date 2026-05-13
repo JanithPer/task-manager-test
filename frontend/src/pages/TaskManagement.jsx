@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import RoleSelector from '../components/RoleSelector';
 import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
+import ConfirmModal from '../components/ConfirmModal';
 import { useToast } from '../context/ToastContext';
 import {
   createTask,
@@ -15,6 +16,8 @@ export default function TaskManagement() {
   const [role, setRole] = useState('Admin');
   const [tasks, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
+  const [deletingTaskId, setDeletingTaskId] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useToast();
 
@@ -88,23 +91,37 @@ export default function TaskManagement() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this task?')) return;
+    setDeletingTaskId(id);
+  };
+
+  const confirmDelete = async () => {
+    setIsDeleting(true);
     try {
-      const data = await deleteTask(id, role);
-      setTasks((prev) => prev.filter((t) => t._id !== id));
+      const data = await deleteTask(deletingTaskId, role);
+      setTasks((prev) => prev.filter((t) => t._id !== deletingTaskId));
       showToast(data.message, 'success');
     } catch (err) {
       showToast(err.message, 'error');
+    } finally {
+      setDeletingTaskId(null);
+      setIsDeleting(false);
     }
+  };
+
+  const cancelDelete = () => {
+    setDeletingTaskId(null);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
-            <h1 className="text-xl font-bold text-gray-900">Task Manager</h1>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-baseline gap-2 sm:gap-3 min-w-0">
+            <div className="size-2 bg-indigo-500 rounded-full animate-pulse shrink-0 self-center" />
+            <h1 className="text-base sm:text-xl font-bold text-gray-900 truncate">Task Manager</h1>
+            <span className="text-[10px] sm:text-[11px] font-medium px-1.5 sm:px-2.5 py-0.5 bg-gradient-to-r from-indigo-50 to-indigo-100 text-indigo-600 rounded-full border border-indigo-200/60 leading-none shrink-0 tracking-wide">
+              by Janith Perera
+            </span>
           </div>
           <RoleSelector role={role} onChange={setRole} />
         </div>
@@ -161,6 +178,15 @@ export default function TaskManagement() {
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={!!deletingTaskId}
+        title="Delete Task"
+        message={`Are you sure you want to delete "${tasks.find((t) => t._id === deletingTaskId)?.title || 'this task'}"? This action cannot be undone.`}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        isLoading={isDeleting}
+      />
     </div>
   );
 }
