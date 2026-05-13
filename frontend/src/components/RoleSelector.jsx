@@ -1,15 +1,15 @@
 export default function RoleSelector({ role, onChange }) {
   return (
     <div className="flex items-center gap-3">
-      <label className="text-sm font-medium text-gray-600">Role:</label>
-      <div className="flex rounded-lg overflow-hidden border border-gray-300">
+      <span className="text-sm font-medium text-gray-500">Role:</span>
+      <div className="flex bg-gray-100 rounded-lg p-0.5 gap-0.5">
         <button
           type="button"
           onClick={() => onChange('Admin')}
-          className={`px-4 py-2 text-sm font-medium transition-colors ${
+          className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
             role === 'Admin'
-              ? 'bg-indigo-600 text-white'
-              : 'bg-white text-gray-700 hover:bg-gray-100'
+              ? 'bg-white text-indigo-700 shadow-sm'
+              : 'text-gray-600 hover:text-gray-900'
           }`}
         >
           Admin
@@ -17,10 +17,10 @@ export default function RoleSelector({ role, onChange }) {
         <button
           type="button"
           onClick={() => onChange('User')}
-          className={`px-4 py-2 text-sm font-medium transition-colors ${
+          className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
             role === 'User'
-              ? 'bg-indigo-600 text-white'
-              : 'bg-white text-gray-700 hover:bg-gray-100'
+              ? 'bg-white text-indigo-700 shadow-sm'
+              : 'text-gray-600 hover:text-gray-900'
           }`}
         >
           User
