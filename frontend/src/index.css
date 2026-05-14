@@ -80,10 +80,11 @@
 
   .date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     bottom: 0;
-    width: 2.5rem;
+    right: 0;
+    width: 100%;
     height: auto;
     cursor: pointer;
     opacity: 0;
